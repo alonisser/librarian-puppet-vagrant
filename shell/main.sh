@@ -1,6 +1,12 @@
 #!/bin/sh
 
 # Directory in which librarian-puppet should manage its modules directory
+if [ ! -d /etc/puppet ]
+then
+  echo 'creating etc/puppet'
+  mkdir /etc/puppet
+fi
+
 PUPPET_DIR=/etc/puppet/
 
 # NB: librarian-puppet might need git installed. If it is not already installed
@@ -34,7 +40,7 @@ cp /vagrant/puppet/Puppetfile $PUPPET_DIR
 
 if [ "$(gem search -i librarian-puppet)" = "false" ]; then
   gem install librarian-puppet
-  cd $PUPPET_DIR && librarian-puppet install --clean
+  cd $PUPPET_DIR && librarian-puppet install --init --clean
 else
   cd $PUPPET_DIR && librarian-puppet update
 fi

@@ -40,7 +40,7 @@ cp /vagrant/puppet/Puppetfile $PUPPET_DIR
 
 if [ "$(gem search -i librarian-puppet)" = "false" ]; then
   gem install librarian-puppet
-  cd $PUPPET_DIR && librarian-puppet install --init --clean
+  cd $PUPPET_DIR && librarian-puppet install --clean
 else
   cd $PUPPET_DIR && librarian-puppet update
 fi
